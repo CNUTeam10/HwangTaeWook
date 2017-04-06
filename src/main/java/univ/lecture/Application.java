@@ -21,6 +21,9 @@ public class Application {
         Calculator calc = new Calculator();
         String exp = args[0];
 
+	if (exp.length() < 3)
+		return calc;
+
         int result = calc.calculate(exp);
         System.out.println(String.format("%s = %d", exp, result));
 
