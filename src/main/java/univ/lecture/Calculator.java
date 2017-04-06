@@ -48,6 +48,12 @@ public class Calculator {
 				b = (double) stack.pop();
 				stack.push(b * a);
 				break;
+			case '/': /// 가 나오면 double형으로 두 번째 pop한 것 / 첫 번째 pop한 것 을 하여 결과를
+				/// push
+				a = (double) stack.pop();
+				b = (double) stack.pop();
+				stack.push(b / a);
+				break;
 
 
 			}
