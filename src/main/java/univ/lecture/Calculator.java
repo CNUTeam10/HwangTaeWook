@@ -59,5 +59,5 @@ public class Calculator {
 			}
 		}
 
-		return (double) stack.pop();    }
+		return (int) stack.pop();    }
 }
