@@ -23,6 +23,14 @@ public class Calculator {
            case '.':
               temp = temp.concat(postfix.charAt(i) + "");
               break;
+           case ' ': // 공백이 나오면 stack에 temp를 double형으로 push하고 temp를 새로 선언하여 비움
+               if (!temp.isEmpty()) // temp가 비어있지 않을 때만 실행
+               {
+                  stack.push(new Double(temp));
+                  temp = new String();
+               }
+               break;
+
            }
         }
 
