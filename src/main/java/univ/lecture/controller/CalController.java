@@ -1,5 +1,6 @@
 package univ.lecture.controller;
 
+import univ.lecture;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,16 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import univ.lecture.riotapi.model.Summoner;
+import univ.lecture.model.Result;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /**
- * Created by taewook on 2017. 4. 11
+ * Copy by taewook on 2017. 4. 11
  */
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/calc")
 @Log4j
 public class RiotApiController {
     @Autowired
@@ -28,13 +29,13 @@ public class RiotApiController {
     @Value("${cal.endpoint}")
     private String calEndpoint;
 
-    @RequestMapping(value = "/summoner/{name}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Summoner querySummoner(@PathVariable("name") String summonerName) throws UnsupportedEncodingException {
-        final String url = calEndpoint + "/summoner/by-name/" +
-                summonerName +
-                "?api_key=" +
-                riotApiKey;
-
+    @RequestMapping(value = "/result/{expression}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Result queryResult(@PathVariable("expression") String expression) throws UnsupportedEncodingException {
+        final String url = calEndpoint;
+	
+	Calculator calculator = new Calculator(expression);
+	queryResult.result = calculator.calculate;
+	
         String response = restTemplate.getForObject(url, String.class);
         Map<String, Object> parsedMap = new JacksonJsonParser().parseMap(response);
 
